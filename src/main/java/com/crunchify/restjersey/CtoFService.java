@@ -19,7 +19,8 @@ public class CtoFService {
 		Double celsius = 36.8;
 		fahrenheit = ((celsius * 9) / 5) + 32;
  
-		String result = "@Produces(\"application/xml\") Output: \n\nC to F Converter Output: \n\n" + fahrenheit;
+		String result = "Testing feature_branch\n" 
+				+ "@Produces(\"application/xml\") Output: \n\nC to F Converter Output: \n\n" + fahrenheit;
 		return "<ctofservice>" + "<celsius>" + celsius + "</celsius>" + "<ctofoutput>" + result + "</ctofoutput>" + "</ctofservice>";
 	}
  
