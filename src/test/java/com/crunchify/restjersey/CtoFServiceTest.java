@@ -9,7 +9,7 @@ public class CtoFServiceTest {
 	@Test
 	public void testConvertCtoF() {
 		CtoFService test = new CtoFService();
-		String expected = CtoFServiceTest.getExpected(36.8, 98.24);
+		String expected = CtoFServiceTest.getExpected(36.8, 98.245);
 		String actual = test.convertCtoF();
 		//System.out.println("->" + expected +  "<-");
 		//System.out.println("->" + actual +  "<-");
