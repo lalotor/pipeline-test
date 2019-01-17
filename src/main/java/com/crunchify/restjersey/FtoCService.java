@@ -1,5 +1,7 @@
 package com.crunchify.restjersey;
 
+import java.math.BigDecimal;
+
 /**
  * @author Crunchify
  */
@@ -26,23 +28,28 @@ public class FtoCService {
 		jsonObject.put("F Value", fahrenheit); 
 		jsonObject.put("C Value", celsius);
  
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject;
+		String result = "@Produces(\"application/json\") Output: F to C Converter Output: " + jsonObject;
 		return Response.status(200).entity(result).build();
 	  }
  
 	  @Path("{f}")
 	  @GET
 	  @Produces("application/json")
-	  public Response convertFtoCfromInput(@PathParam("f") float f) throws JSONException {
+	  public Response convertFtoCfromInput(@PathParam("f") Double f) throws JSONException {
  
 		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius =  (f - 32)*5/9; 
-		jsonObject.put("F Value", f); 
+		Double fahrenheit = f;
+		Double celsius = (fahrenheit - 32)*5/9;		
+		jsonObject.put("F Value", fahrenheit); 
 		jsonObject.put("C Value", celsius);
  
-		String result = "Testing feature_branch\n" 
-				+ "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject;
+		String result = "@Produces(\"application/json\") Output: F to C Converter Output: " + jsonObject;
 		return Response.status(200).entity(result).build();
+	  }
+	  
+	  private static float roundFloat(float f, int scale) {
+		  BigDecimal bd = new BigDecimal(String.valueOf(f));
+		  bd.setScale(scale, BigDecimal.ROUND_HALF_UP);
+		  return bd.floatValue();
 	  }
 }

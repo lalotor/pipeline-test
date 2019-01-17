@@ -19,8 +19,7 @@ public class CtoFService {
 		Double celsius = 36.8;
 		fahrenheit = ((celsius * 9) / 5) + 32;
  
-		String result = "Testing feature_branch\n" 
-				+ "@Produces(\"application/xml\") Output: \n\nC to F Converter Output: \n\n" + fahrenheit;
+		String result = "@Produces(\"application/xml\") Output: C to F Converter Output: " + fahrenheit;
 		return "<ctofservice>" + "<celsius>" + celsius + "</celsius>" + "<ctofoutput>" + result + "</ctofoutput>" + "</ctofservice>";
 	}
  
@@ -32,8 +31,7 @@ public class CtoFService {
 		Double celsius = c;
 		fahrenheit = ((celsius * 9) / 5) + 32;
  
-		String result = "Testing Git and Jenkins Webhook\n" 
-				+ "@Produces(\"application/xml\") Output: \n\nC to F Converter Output: \n\n" + fahrenheit;
+		String result = "@Produces(\"application/xml\") Output: C to F Converter Output: " + fahrenheit;
 		return "<ctofservice>" + "<celsius>" + celsius + "</celsius>" + "<ctofoutput>" + result + "</ctofoutput>" + "</ctofservice>";
 	}
 }
