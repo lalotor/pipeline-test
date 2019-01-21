@@ -3,3 +3,5 @@
 .project
 .settings/
 target/
+reports/cpd-report.txt
+reports/pmd-report.txt
