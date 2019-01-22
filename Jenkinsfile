@@ -28,8 +28,7 @@ node {
       recordIssues enabledForFailure: true, tool: spotBugs(), failedTotalHigh: 1 //unstableTotalHigh: 1
 	  
 	  def currentResultA = currentBuild.result
-	  echo 'currentResultA ' + currentResultA
-	  if (currentResultA == 'FAILED') {
+	  if (currentResultA == 'FAILURE') {
           echo 'Error en análisis de código'
 		  error "Error en análisis de código"
       }
