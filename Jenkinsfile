@@ -22,18 +22,17 @@ node {
       }
       
       recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-      recordIssues enabledForFailure: true, tool: checkStyle()      
-      recordIssues enabledForFailure: true, tool: cpd()
-      recordIssues enabledForFailure: true, tool: pmd()
-	  recordIssues enabledForFailure: true, tool: spotBugs()
+      recordIssues enabledForFailure: true, tool: checkStyle(), unstableTotalHigh: 1      
+      recordIssues enabledForFailure: true, tool: pmd(), unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: cpd(), unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: spotBugs(), unstableTotalHigh: 1
       
       //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')
       
       //recordIssues tool: enabledForFailure: true, java(), unstableTotalHigh: 10, unstableNewAll: 1
       
       //def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
-      //publishIssues issues: [pmd]
-      
+      //publishIssues issues: [pmd]      
       //publishIssues id: 'analysis', name: 'All Issues', 
       //  issues: [pmd], 
       //  filters: [includePackage('io.jenkins.plugins.analysis.*')]
