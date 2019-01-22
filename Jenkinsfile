@@ -18,18 +18,18 @@ node {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -batch-mode -V -U -e pmd:pmd pmd:cpd"
       } else {
-         bat(/"${mvnHome}\bin\mvn" --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs/)
+         bat(/"${mvnHome}\bin\mvn" --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs/)
       }
-	  
+      
       recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-      recordIssues enabledForFailure: true, tool: checkStyle()
-      recordIssues enabledForFailure: true, tool: spotBugs()
-      recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
-      recordIssues enabledForFailure: true, tool: pmd(pattern: '**/target/pmd.xml')
-	  
-	  //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')
-	  
-	  // recordIssues tool: enabledForFailure: true, java(), unstableTotalHigh: 10, unstableNewAll: 1
+      recordIssues enabledForFailure: true, tool: checkStyle()      
+      recordIssues enabledForFailure: true, tool: cpd()
+      recordIssues enabledForFailure: true, tool: pmd()
+	  recordIssues enabledForFailure: true, tool: spotBugs()
+      
+      //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')
+      
+      //recordIssues tool: enabledForFailure: true, java(), unstableTotalHigh: 10, unstableNewAll: 1
       
       //def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
       //publishIssues issues: [pmd]
@@ -50,19 +50,19 @@ node {
       //archive 'target/*.jar'
     }
   } catch (e) {
-	currentBuild.result = "FAILED"
-	echo 'This will run only if failed'
-	
+    currentBuild.result = "FAILED"
+    echo 'This will run only if failed'
+    
     //*** ENVIAR NOTIFICACION DE ERROR A INTERESADOS ***
-	/*def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    /*def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
     def details = """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
       <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"""	
-	emailext (
+    emailext (
       subject: subject,
       body: details,
       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
     )*/
-	
+    
     throw e
   } finally {
     def currentResult = currentBuild.result ?: 'SUCCESS'
