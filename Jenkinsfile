@@ -22,10 +22,10 @@ node {
       }
       
       recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-      recordIssues enabledForFailure: true, tool: checkStyle(), unstableTotalHigh: 1      
-      recordIssues enabledForFailure: true, tool: pmd(), unstableTotalHigh: 1
-      recordIssues enabledForFailure: true, tool: cpd(), unstableTotalHigh: 1
-      recordIssues enabledForFailure: true, tool: spotBugs(), unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: checkStyle(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: pmd(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: cpd(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: spotBugs(), failedTotalHigh: 1 //unstableTotalHigh: 1
       
       //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')
       
