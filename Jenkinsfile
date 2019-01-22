@@ -18,16 +18,26 @@ node {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -batch-mode -V -U -e pmd:pmd pmd:cpd"
       } else {
-         bat(/"${mvnHome}\bin\mvn" -batch-mode -V -U -e pmd:pmd pmd:cpd/)
+         bat(/"${mvnHome}\bin\mvn" --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs/)
       }
+	  
+      recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+      recordIssues enabledForFailure: true, tool: checkStyle()
+      recordIssues enabledForFailure: true, tool: spotBugs()
+      recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
+      recordIssues enabledForFailure: true, tool: pmd(pattern: '**/target/pmd.xml')
+	  
+	  //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')
+	  
+	  // recordIssues tool: enabledForFailure: true, java(), unstableTotalHigh: 10, unstableNewAll: 1
       
-      def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
-      publishIssues issues: [pmd]
+      //def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
+      //publishIssues issues: [pmd]
       
-      publishIssues id: 'analysis', name: 'All Issues', 
-        issues: [pmd], 
-        filters: [includePackage('io.jenkins.plugins.analysis.*')]
-    }    
+      //publishIssues id: 'analysis', name: 'All Issues', 
+      //  issues: [pmd], 
+      //  filters: [includePackage('io.jenkins.plugins.analysis.*')]
+    }
     stage('Build') {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
