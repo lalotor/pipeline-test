@@ -27,10 +27,8 @@ node {
       recordIssues enabledForFailure: true, tool: cpd(), failedTotalHigh: 1 //unstableTotalHigh: 1
       recordIssues enabledForFailure: true, tool: spotBugs(), failedTotalHigh: 1 //unstableTotalHigh: 1
       
-      def currentResultA = currentBuild.result
-      if (currentResultA == 'FAILURE') {
-          echo 'Error en análisis de código'
-          error "Error en análisis de código"
+      if (currentBuild.result == 'FAILURE') {
+          error "Error en analisis de codigo"
       }
       
       //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')      
