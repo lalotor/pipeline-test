@@ -26,14 +26,14 @@ node {
       recordIssues enabledForFailure: true, tool: pmd(), failedTotalHigh: 1 //unstableTotalHigh: 1
       recordIssues enabledForFailure: true, tool: cpd(), failedTotalHigh: 1 //unstableTotalHigh: 1
       recordIssues enabledForFailure: true, tool: spotBugs(), failedTotalHigh: 1 //unstableTotalHigh: 1
-	  
-	  def currentResultA = currentBuild.result
-	  if (currentResultA == 'FAILURE') {
+      
+      def currentResultA = currentBuild.result
+      if (currentResultA == 'FAILURE') {
           echo 'Error en análisis de código'
-		  error "Error en análisis de código"
+          error "Error en análisis de código"
       }
-	  
-	  //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')      
+      
+      //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')      
       //recordIssues tool: enabledForFailure: true, java(), unstableTotalHigh: 10, unstableNewAll: 1
       
       //def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
