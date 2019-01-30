@@ -48,14 +48,14 @@ node {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package"
       } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package/)
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
     }
     stage('Deploy') {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true wildfly:deploy -Dwildfly.port=10090 -Dwildfly.deployment.filename=CrunchifyRESTJerseyExample.war"
       } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.skip=true wildfly:deploy -Dwildfly.hostname=${wildflyHostname} -Dwildfly.port=${wildflyPort} -Dwildfly.deployment.filename=${wildflyDeploymentFilename}/)
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore wildfly:deploy -Dwildfly.hostname=${wildflyHostname} -Dwildfly.port=${wildflyPort} -Dwildfly.deployment.filename=${wildflyDeploymentFilename}/)
       }
     }
     stage('Results') {
