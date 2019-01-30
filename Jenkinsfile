@@ -1,9 +1,9 @@
 node {
   try {
     def mvnHome = tool 'Maven'
-    def wildfly.hostname = "localhost"
-    def wildfly.port = 10090
-    def wildfly.deployment.filename = "CrunchifyRESTJerseyExample.war"
+    def wildflyHostname = "localhost"
+    def wildflyPort = 10090
+    def wildflyDeploymentFilename = "CrunchifyRESTJerseyExample.war"
     
     stage('Preparation') {
       //git url: 'https://github.com/lalotor/pipeline-test.git', branch: 'develop'
@@ -55,7 +55,7 @@ node {
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true wildfly:deploy -Dwildfly.port=10090 -Dwildfly.deployment.filename=CrunchifyRESTJerseyExample.war"
       } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.skip=true wildfly:deploy -Dwildfly.hostname=${wildfly.hostname} -Dwildfly.port=${wildfly.port} -Dwildfly.deployment.filename=${wildfly.deployment.filename}/)
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.skip=true wildfly:deploy -Dwildfly.hostname=${wildflyHostname} -Dwildfly.port=${wildflyPort} -Dwildfly.deployment.filename=${wildflyDeploymentFilename}/)
       }
     }
     stage('Results') {
