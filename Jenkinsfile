@@ -25,13 +25,14 @@ node {
       }
       
       recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-      recordIssues enabledForFailure: true, tool: checkStyle() //, failedTotalHigh: 1 //unstableTotalHigh: 1
-      recordIssues enabledForFailure: true, tool: pmd() //, failedTotalHigh: 1 //unstableTotalHigh: 1
-      recordIssues enabledForFailure: true, tool: cpd() //, failedTotalHigh: 1 //unstableTotalHigh: 1
-      recordIssues enabledForFailure: true, tool: spotBugs() //, failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: checkStyle(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: pmd(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: cpd(), failedTotalHigh: 1 //unstableTotalHigh: 1
+      recordIssues enabledForFailure: true, tool: spotBugs(), failedTotalHigh: 1 //unstableTotalHigh: 1
       
       if (currentBuild.result == 'FAILURE') {
-          error "Error en analisis de codigo"
+          //Ignore quality gates temporaly
+		  //error "Error en analisis de codigo"
       }
       
       //recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'checkstyle-result.xml')      
